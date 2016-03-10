@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Calendar</string>
+    <string name="menu_title_show_calendar">show calendar</string>
+</resources>
