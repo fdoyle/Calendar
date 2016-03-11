@@ -4,6 +4,13 @@
 
 This document details some preparations made before and during development of the test project
 
+## A bit about me
+I graduated in 2012 and I've worked as a Software Engineer for WillowTree since. In that time, I've worked directly with numerous clients to build 4 Android apps from scratch, with a fifth that should be out shortly, as well as adding features and doing maintenance on numerous others. On those projects, I've worked alone, as a part of a team, and as a platform lead. 
+
+Outside of work, I still enjoy writing software, building simple Android demos, learning and tinkering with new technologies, etc. I've recently started learning about web technologies, building some basic React webapps. 
+
+Beyond programming, I enjoy guitar, muay thai, and games of all sorts. 
+
 ## Current Outlook App
 ### basic notes
  - agenda dates go from jan 17 to feb 19 (33 days) (not consistent)
@@ -23,10 +30,6 @@ This document details some preparations made before and during development of th
  - returning to open monthly view from locked screen (activity recreation?) can result in monthly animating to current date.
  - the event indicator dots on the month view don't recycle properly. if you drag across multiple months without ever letting the calendar view settle, you'll see data from months past. 
  - on march, select the 31st. go to april, moves to 30th. Go back, still on 30th. 
-
-
-### todos
-There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
 
 ## Architecture
 ### On using the Android Calendar object
@@ -69,3 +72,7 @@ The demo creates a fairly substantial backing model to keep track of all of its 
 originally went with a recyclerview based implementation, but that ended up being slow since it required calling notifydatasetchanged whenever the date was changed for the calendar. 
 
 Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code.
+
+### todos
+There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
+
