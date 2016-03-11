@@ -1,5 +1,7 @@
 # Readme.txt
 
+*N.B. This project is not done* 
+
 This document details some preparations made before and during development of the test project
 
 ### Notes On Current Functionality:
