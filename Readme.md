@@ -22,8 +22,8 @@ Beyond programming, I enjoy guitar, muay thai, and games of all sorts.
  - On month cell, a blue dot is shown for days with events. 
 
 ### Event List
-    sticky headers
-    if no events for date, "No event" entry appears
+ - sticky headers
+ - if no events for date, "No event" entry appears
 
 ### Issues With Current App
  - sometimes the monthly day indicator jumps back a day when clicked
