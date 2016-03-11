@@ -8,4 +8,5 @@
     <string name="month_grid_header_thursday">Thu</string>
     <string name="month_grid_header_friday">Fri</string>
     <string name="month_grid_header_saturday">Sat</string>
+    <string name="agenda_item_no_events">No Event</string>
 </resources>

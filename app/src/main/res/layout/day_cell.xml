@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center">
 
-    <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    <CheckBox
         android:id="@+id/day_cell_day_of_month"
         android:layout_width="35dp"
         android:layout_height="35dp"
