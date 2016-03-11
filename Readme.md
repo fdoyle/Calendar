@@ -33,7 +33,7 @@ Beyond programming, I enjoy guitar, muay thai, and games of all sorts.
  - the event indicator dots on the month view don't recycle properly. if you drag across multiple months without ever letting the calendar view settle, you'll see data from months past. 
  - on march, select the 31st. go to april, moves to 30th. Go back, still on 30th. 
 
-## Architecture
+## Demo App Architecture
 ### On using the Android Calendar object
 There are a number of options for Dates and Times on android. 
 Date is built into java, but most of the useful stuff is deprecated
@@ -65,8 +65,8 @@ If it became a burden, you could probably make most of these collections sparse,
 
 This model lends itself well to an Observable model, where data is calculated or pulled from the network as needed. If you're about to load a month you don't have, you request it, and the UI will wait. 
 
-### On Creating a lot of objects (which this demo does)
-I very much agree with the idea that you shouldn't optimize until you can prove, though benchmarks, that you need to. 
+### On Creating a lot of objects
+I very much agree with the idea that you shouldn't optimize until you can prove, through benchmarks, that you need to. 
 
 The demo creates a fairly substantial backing model to keep track of all of its events. It is likely very possible to optimize this, but I think it would be at the expense of some amount of clarity. 
 
@@ -77,4 +77,6 @@ Switching to a more directly-accessible gridlayout improved performance signific
 
 ### todos
 There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
+
+*Develop and Master are both building on March 10. Currently, lint checks can fail the build (a personal preference) but that means differing lint versions can break things. If anything's broken, let me know and we'll get it straightened out* 
 
