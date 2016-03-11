@@ -2,7 +2,7 @@
 
 *N.B. This project is not done* 
 
-*This project has no license. The author retains all rights. (though I will probably open source various parts)* 
+*This project has no license. The author retains all rights. (Sorry. This will probably change once this has fulfilled its purpose)* 
 
 This document details some preparations made before and during development of the test project
 
