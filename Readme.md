@@ -2,6 +2,8 @@
 
 *N.B. This project is not done* 
 
+*This project has no license. The author retains all rights.* 
+
 This document details some preparations made before and during development of the test project
 
 ### Notes On Current Functionality:
