@@ -69,8 +69,6 @@ public class DayGridAdapter extends RecyclerView.Adapter<DayGridAdapter.DayCellV
             long endOfDayAtIndex = calendarForDayAtIndex.getTimeInMillis();
             dayCellData[i] = new DayCellData(calendarDayAtIndex,dayOfMonth, startOfDayAtIndex, endOfDayAtIndex, dayHasEvents, isInSelectedMonth, false);
         }
-
-        Log.d("TAG", "daygrid setcontent notify");
         notifyDataSetChanged();
     }
 

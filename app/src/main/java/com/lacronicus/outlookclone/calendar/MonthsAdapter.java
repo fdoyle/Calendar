@@ -57,7 +57,6 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
         if (currentlySelectedDay != null) {
             monthView.setDaySelectedListener(null);
-            Log.d("TAG", "setting selected day " + currentlySelectedDay.getDayOfMonth() + " " + this.hashCode());
             monthView.setSelectedDay(currentlySelectedDay);
             monthView.setDaySelectedListener(this);
         }

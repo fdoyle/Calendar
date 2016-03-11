@@ -84,7 +84,6 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.EventListI
     public void setContent(List<AgendaViewModel> calendar) {
         this.content = calendar;
         notifyDataSetChanged(); //todo a proper diffing implementation between new list and old
-        Log.d("TAG", "agenda adapter setContent notify");
     }
 
     public List<AgendaViewModel> getContent() {
