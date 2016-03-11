@@ -1,31 +1,27 @@
 # Readme.txt
 
-*N.B. This project is not done* 
-
-*This project has no license. The author retains all rights. (Sorry. This will probably change once this has fulfilled its purpose)* 
+*just a heads up, this is a work in progress. Just granting access now that there's something to see*
 
 This document details some preparations made before and during development of the test project
 
-### Notes On Current Functionality:
-
-
- - event list dates go from jan 17 to feb 19 (33 days) (not consistent)
+## Current Outlook App
+### basic notes
+ - agenda dates go from jan 17 to feb 19 (33 days) (not consistent)
  - the monthly view always has 7 columns for days of the week, and 6 columns for weeks (plus one for day labels). This is true even when the selected month does not fill 6 weeks worth of space
- - (Feb 2015 only takes up 4)
+ - (Feb 2015 only takes up 4 weeks)
  - in monthly view, clicking on a day not in "current" month does nothing
- - monthly view goes out at least 100 years, goes back 100 as well
+ - monthly view goes out at least 100 years, goes back 100 as well, effectively "infinite"
  - On monthly calendar shown, immediately makes all space, then calendar slides in.
- - On month cell, a blue dot is shown for days with events. This dot only appears 
+ - On month cell, a blue dot is shown for days with events. 
 
 ### Event List
     sticky headers
     if no events for date, "No event" entry appears
 
-
 ### Issues With Current App
  - sometimes the monthly day indicator jumps back a day when clicked
  - returning to open monthly view from locked screen (activity recreation?) can result in monthly animating to current date.
- - the event indicator dots on the month view don't recycle properly. if you drag across multiple months without ever letting the calendar view settle, you'll see data from months past 
+ - the event indicator dots on the month view don't recycle properly. if you drag across multiple months without ever letting the calendar view settle, you'll see data from months past. 
  - on march, select the 31st. go to april, moves to 30th. Go back, still on 30th. 
 
 
@@ -47,7 +43,7 @@ Went with Recyclerview because it's intended to be much more flexible than ViewP
 
 And, now that I'm done, I get the beginnings of some nice libraries. (I've wanted better smooth-scroll for some time, and recyclerview snapping is a common request around the office)
 
-### thoughts on event list model
+### On the Calendar model
 Create a tree, where each level represents a unit of time
 All-Time->Years->Months->Days->Events (by start time)
 to render, flatten the tree to a list of days
@@ -72,4 +68,4 @@ The demo creates a fairly substantial backing model to keep track of all of its 
 ### Calendar PageView
 originally went with a recyclerview based implementation, but that ended up being slow since it required calling notifydatasetchanged whenever the date was changed for the calendar. 
 
-Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code. 
+Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code.
