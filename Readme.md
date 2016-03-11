@@ -2,6 +2,8 @@
 
 *just a heads up, this is a work in progress. Just granting access now that there's something to see*
 
+Current work is probably on develop
+
 This document details some preparations made before and during development of the test project
 
 ## A bit about me
