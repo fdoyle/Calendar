@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Calendar</string>
     <string name="menu_title_show_calendar">show calendar</string>
+    <string name="month_grid_header_sunday">Sun</string>
+    <string name="month_grid_header_monday">Mon</string>
+    <string name="month_grid_header_tuesday">Tue</string>
+    <string name="month_grid_header_wednesday">Wed</string>
+    <string name="month_grid_header_thursday">Thu</string>
+    <string name="month_grid_header_friday">Fri</string>
+    <string name="month_grid_header_saturday">Sat</string>
 </resources>
