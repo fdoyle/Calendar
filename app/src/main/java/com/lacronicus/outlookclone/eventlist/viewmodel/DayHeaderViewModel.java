@@ -11,7 +11,7 @@ import java.util.Locale;
 public class DayHeaderViewModel implements AgendaViewModel {
     OutlookDay day;
 
-    static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    static SimpleDateFormat format = new SimpleDateFormat("cccc',' LLLL d", Locale.getDefault());
 
     public DayHeaderViewModel(OutlookDay day) {
         this.day = day;
