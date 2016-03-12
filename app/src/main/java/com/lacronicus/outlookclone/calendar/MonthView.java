@@ -20,7 +20,7 @@ import java.util.Locale;
 /**
  * Created by fdoyle on 3/10/16.
  */
-public class MonthView2 extends FrameLayout implements DaySelectedListener {
+public class MonthView extends FrameLayout implements DaySelectedListener {
     public static final int DAYS_PER_WEEK = 7;
     public static final int WEEKS_DISPLAYED = 6;
     public static final int CELL_COUNT = DAYS_PER_WEEK * WEEKS_DISPLAYED;
@@ -41,23 +41,23 @@ public class MonthView2 extends FrameLayout implements DaySelectedListener {
     int maxDaysInMonth;
 
 
-    public MonthView2(Context context) {
+    public MonthView(Context context) {
         super(context);
         init();
     }
 
-    public MonthView2(Context context, AttributeSet attrs) {
+    public MonthView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MonthView2(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MonthView2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MonthView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }

@@ -1,7 +1,6 @@
 package com.lacronicus.outlookclone.calendar;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,7 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
-        MonthView2 monthView = (MonthView2) holder.itemView;
+        MonthView monthView = (MonthView) holder.itemView;
         if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
             monthView.setContent(months.get(position).outlookMonth);
         }
@@ -46,7 +45,7 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position, List<Object> payloads) {
-        MonthView2 monthView = (MonthView2) holder.itemView;
+        MonthView monthView = (MonthView) holder.itemView;
         if (payloads.size() == 0 || !(Boolean) payloads.get(0)) {
             if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
                 monthView.setDaySelectedListener(null);
