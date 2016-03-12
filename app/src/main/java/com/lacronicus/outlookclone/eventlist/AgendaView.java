@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.lacronicus.outlookclone.R;
@@ -25,7 +26,7 @@ public class AgendaView extends FrameLayout {
 
     Map<OutlookDay, Integer> outlookDayIndexMap;
 
-    RecyclerView agendaView;
+    RecyclerView agendaList;
     AgendaAdapter agendaAdapter;
 
     public AgendaView(Context context) {
@@ -51,11 +52,11 @@ public class AgendaView extends FrameLayout {
 
     public void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_agenda, this);
-        agendaView = (RecyclerView) findViewById(R.id.agenda_list);
+        agendaList = (RecyclerView) findViewById(R.id.agenda_list);
         final LinearLayoutManager agendaManager = new LinearLayoutManager(getContext());
-        agendaView.setLayoutManager(agendaManager);
+        agendaList.setLayoutManager(agendaManager);
         agendaAdapter = new AgendaAdapter();
-        agendaView.setAdapter(agendaAdapter);
+        agendaList.setAdapter(agendaAdapter);
     }
 
     public void setContent(OutlookCalendar outlookCalendar) {
@@ -65,16 +66,28 @@ public class AgendaView extends FrameLayout {
     }
 
     public void setOnScrollListener(RecyclerView.OnScrollListener listener) {
-        agendaView.clearOnScrollListeners();
-        agendaView.addOnScrollListener(listener);
+        agendaList.clearOnScrollListeners();
+        agendaList.addOnScrollListener(listener);
     }
 
     public void setSelectedDay(OutlookDay outlookDay) {
         int indexOfDay = outlookDayIndexMap.get(outlookDay);
-        ((LinearLayoutManager) agendaView.getLayoutManager()).scrollToPositionWithOffset(indexOfDay, 0);
+        ((LinearLayoutManager) agendaList.getLayoutManager()).scrollToPositionWithOffset(indexOfDay, 0);
     }
 
     public OutlookDay getDayForTopmostView() {
-        return agendaAdapter.getContent().get(agendaView.getLayoutManager().getPosition(agendaView.getChildAt(0))).getAssociatedDay();
+        View firstViewWithinPadding = agendaList.findChildViewUnder(1, agendaList.getPaddingTop() + 1); //get's the first item within the list's padding bounds //todo optimize. this call goes bottom to top, should ideally go top to bottom
+        return agendaAdapter.getContent().get(agendaList.getLayoutManager().getPosition(firstViewWithinPadding)).getAssociatedDay();
     }
+
+    public void setListPaddingTop(int paddingTop){
+        int delta = paddingTop - agendaList.getPaddingTop();
+        agendaList.setPadding(agendaList.getPaddingLeft(), paddingTop, agendaList.getPaddingRight(), agendaList.getPaddingBottom());
+        agendaList.scrollBy(0,-delta);
+    }
+
+    public int getListPaddingTop() {
+        return agendaList.getPaddingTop();
+    }
+
 }

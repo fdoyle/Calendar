@@ -8,12 +8,14 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookMonth;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by fdoyle on 3/10/16.
@@ -24,6 +26,8 @@ public class MonthView2 extends FrameLayout implements DaySelectedListener {
     public static final int CELL_COUNT = DAYS_PER_WEEK * WEEKS_DISPLAYED;
 
     DaySelectedListener daySelectedListener;
+
+    TextView monthTitle;
 
 
     int indexOfFirstDayInMonth;
@@ -61,6 +65,7 @@ public class MonthView2 extends FrameLayout implements DaySelectedListener {
     public void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_month_grid, this);
         GridLayout grid = (GridLayout) findViewById(R.id.view_month_grid);
+        monthTitle = (TextView) findViewById(R.id.month_grid_title);
         for (int i = 0; i != CELL_COUNT; i++) {
             DayView cell = new DayView(getContext());
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -78,6 +83,7 @@ public class MonthView2 extends FrameLayout implements DaySelectedListener {
         indexOfCurrentlySelectedDay = -1;
         indexOfFirstDayInMonth = -1;
         maxDaysInMonth = monthToDisplay.getStartOfMonth().getActualMaximum(Calendar.DAY_OF_MONTH);
+        monthTitle.setText(monthToDisplay.getStartOfMonth().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
         this.month = monthToDisplay;
         Calendar firstDayOfMonth = monthToDisplay.getStartOfMonth();
         firstDayOfMonth.setFirstDayOfWeek(Calendar.SUNDAY);//if you wanted to change the first day of the week, this is where you'd do it. Change this, everything "should" just fall into place
@@ -144,7 +150,7 @@ public class MonthView2 extends FrameLayout implements DaySelectedListener {
     @Override
     public void onDaySelected(OutlookDay day) {
         setSelectedDay(day);
-        if(daySelectedListener != null) {
+        if (daySelectedListener != null) {
             daySelectedListener.onDaySelected(day);
         }
     }

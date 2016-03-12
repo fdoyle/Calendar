@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.lacronicus.outlookclone.MainActivity">
-
-    <com.lacronicus.outlookclone.calendar.CalendarView
-        android:id="@+id/calendar_view"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <com.lacronicus.outlookclone.eventlist.AgendaView
         android:id="@+id/agenda_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_height="match_parent"/>
+
+    <com.lacronicus.outlookclone.calendar.CalendarView
+        android:id="@+id/calendar_view"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
