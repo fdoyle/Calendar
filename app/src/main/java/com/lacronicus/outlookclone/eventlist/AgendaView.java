@@ -24,6 +24,7 @@ import java.util.Map;
  * Created by fdoyle on 3/10/16.
  */
 public class AgendaView extends FrameLayout {
+    public static final String PROPERTY_LIST_PADDING_TOP = "listPaddingTop";
 
     Map<OutlookDay, Integer> outlookDayIndexMap;
 
@@ -81,9 +82,10 @@ public class AgendaView extends FrameLayout {
         if(firstViewWithinPadding != null) {
             return agendaAdapter.getContent().get(agendaList.getLayoutManager().getPosition(firstViewWithinPadding)).getAssociatedDay();
         } else {
-            return null; //if this view is entirely pushed off the screen (say by a calendar or some other component) there may not be a view under that position. 
+            return null; //if this view is entirely pushed off the screen (say by a calendar or some other component) there may not be a view under that position.
         }
     }
+
 
     public void setListPaddingTop(int paddingTop){
         int delta = paddingTop - agendaList.getPaddingTop();

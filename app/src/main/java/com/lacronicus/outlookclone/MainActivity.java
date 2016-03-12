@@ -2,7 +2,6 @@ package com.lacronicus.outlookclone;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +19,7 @@ import com.lacronicus.outlookclone.eventlist.AgendaView;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.util.ChronologyContextProvider;
+import com.lacronicus.outlookclone.util.AnimatorListener;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -109,35 +109,20 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
                     .setDuration(300)
                     .setListener(null)
                     .start();
-            ObjectAnimator.ofInt(agendaView, "listPaddingTop", calendarView.getHeight()).setDuration(300).start() ;
+            ObjectAnimator.ofInt(agendaView, AgendaView.PROPERTY_LIST_PADDING_TOP, calendarView.getHeight()).setDuration(300).start() ;
         } else {
             //exit animation
-            ObjectAnimator.ofInt(agendaView, "listPaddingTop", 0).setDuration(300).start();
+            ObjectAnimator.ofInt(agendaView, AgendaView.PROPERTY_LIST_PADDING_TOP, 0).setDuration(300).start();
             calendarView.animate()
                     .translationY(-calendarView.getHeight())
                     .translationX(calendarView.getWidth() / 3)
                     .scaleX(0.2f)
                     .scaleY(0.2f)
                     .setDuration(300)
-                    .setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
+                    .setListener(new AnimatorListener() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             calendarView.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
                         }
                     }).start();
         }
