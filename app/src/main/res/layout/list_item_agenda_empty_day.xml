@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:text="@string/agenda_item_no_events"
+<com.lacronicus.outlookclone.eventlist.view.EmptyDayView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-</TextView>
+</com.lacronicus.outlookclone.eventlist.view.EmptyDayView>

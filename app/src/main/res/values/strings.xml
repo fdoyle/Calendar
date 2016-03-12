@@ -9,4 +9,7 @@
     <string name="month_grid_header_friday">Fri</string>
     <string name="month_grid_header_saturday">Sat</string>
     <string name="agenda_item_no_events">No Event</string>
+    <string name="header_text_prefix_today">"Today "</string>
+    <string name="header_text_prefix_tomorrow">"Tomorrow "</string>
+    <string name="header_text_prefix_yesterday">"Yesterday "</string>
 </resources>

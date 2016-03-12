@@ -37,7 +37,7 @@ public class EventView extends FrameLayout {
     }
 
     public void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.list_item_agenda_event, this);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_agenda_event, this);
     }
 
     public void setContent(EventViewModel viewModel){

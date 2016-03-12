@@ -36,7 +36,7 @@ public class EmptyDayView extends FrameLayout {
     }
 
     public void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.list_item_agenda_empty_day, this);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_empty_day, this);
     }
 
     public void setContent(EmptyDayViewModel viewModel) {

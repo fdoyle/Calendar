@@ -19,9 +19,11 @@ import com.lacronicus.outlookclone.calendar.DaySelectedListener;
 import com.lacronicus.outlookclone.eventlist.AgendaView;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements DaySelectedListener {
 
@@ -34,9 +36,12 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
 
     MainActivityOnScrollListener scrollListener = new MainActivityOnScrollListener();
 
+    ChronologyContextProvider chronologyContextProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        chronologyContextProvider = new ChronologyContextProvider(new Date());//todo inject this object, rather than creating it here. This would allow for inst tests where "today" doesn't vary
         setContentView(R.layout.activity_main);
         loadData();
 
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
         calendarView.setContent(outlookCalendar);
 
         agendaView = (AgendaView) findViewById(R.id.agenda_view);
-        agendaView.setContent(outlookCalendar);
+        agendaView.setContent(chronologyContextProvider, outlookCalendar);
 
         agendaView.setOnScrollListener(scrollListener);
         calendarView.setDaySelectedListener(this);
@@ -135,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
                     }).start();
         }
 
-//        calendarView.setVisibility(calendarView.getVisibility() == View.VISIBLE ? View.GONE :View.VISIBLE);
     }
 
     public void loadData() {

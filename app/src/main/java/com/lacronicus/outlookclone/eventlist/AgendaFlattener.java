@@ -11,6 +11,7 @@ import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookEvent;
 import com.lacronicus.outlookclone.model.OutlookMonth;
 import com.lacronicus.outlookclone.model.OutlookYear;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,11 @@ import java.util.Map;
  * Flattens a Calendar tree for use in a Linear Recyclerview
  */
 public class AgendaFlattener {
+    ChronologyContextProvider chronologyContextProvider;
+
+    public AgendaFlattener(ChronologyContextProvider chronologyContextProvider) {
+        this.chronologyContextProvider = chronologyContextProvider;
+    }
 
     public Pair<List<AgendaViewModel>, Map<OutlookDay, Integer>> flatten(OutlookCalendar calendar) {
         List<AgendaViewModel> items = new ArrayList<>();
@@ -47,7 +53,7 @@ public class AgendaFlattener {
     }
 
     public void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookDay day) {
-        items.add(new DayHeaderViewModel(day));
+        items.add(new DayHeaderViewModel(chronologyContextProvider, day));
         outlookDayToIndexMap.put(day, items.size() - 1);
 
         if (day.getEvents().size() > 0) {

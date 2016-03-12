@@ -15,6 +15,7 @@ import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.eventlist.viewmodel.AgendaViewModel;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.List;
 import java.util.Map;
@@ -59,8 +60,8 @@ public class AgendaView extends FrameLayout {
         agendaList.setAdapter(agendaAdapter);
     }
 
-    public void setContent(OutlookCalendar outlookCalendar) {
-        Pair<List<AgendaViewModel>, Map<OutlookDay, Integer>> flattenedData = new AgendaFlattener().flatten(outlookCalendar);
+    public void setContent(ChronologyContextProvider chronologyContextProvider, OutlookCalendar outlookCalendar) {
+        Pair<List<AgendaViewModel>, Map<OutlookDay, Integer>> flattenedData = new AgendaFlattener(chronologyContextProvider).flatten(outlookCalendar);
         agendaAdapter.setContent(flattenedData.first);
         outlookDayIndexMap = flattenedData.second;
     }
