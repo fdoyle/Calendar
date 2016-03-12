@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:clipToPadding="false"
         android:orientation="vertical">
 
         <TextView
@@ -90,6 +91,7 @@
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/view_month_grid"
+            android:clipChildren="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:alignmentMode="alignBounds"

@@ -78,7 +78,11 @@ public class AgendaView extends FrameLayout {
 
     public OutlookDay getDayForTopmostView() {
         View firstViewWithinPadding = agendaList.findChildViewUnder(1, agendaList.getPaddingTop() + 1); //get's the first item within the list's padding bounds //todo optimize. this call goes bottom to top, should ideally go top to bottom
-        return agendaAdapter.getContent().get(agendaList.getLayoutManager().getPosition(firstViewWithinPadding)).getAssociatedDay();
+        if(firstViewWithinPadding != null) {
+            return agendaAdapter.getContent().get(agendaList.getLayoutManager().getPosition(firstViewWithinPadding)).getAssociatedDay();
+        } else {
+            return null; //if this view is entirely pushed off the screen (say by a calendar or some other component) there may not be a view under that position. 
+        }
     }
 
     public void setListPaddingTop(int paddingTop){

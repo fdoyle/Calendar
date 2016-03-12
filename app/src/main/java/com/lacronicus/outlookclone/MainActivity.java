@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             OutlookDay topmostDay = agendaView.getDayForTopmostView();
-            calendarView.setSelectedDay(topmostDay);
+            if(topmostDay != null) {
+                calendarView.setSelectedDay(topmostDay);
+            }
         }
     }
 

@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="wrap_content"
+    android:clipChildren="false"
     android:layout_height="wrap_content">
     <com.lacronicus.outlookclone.calendar.DayView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/day_cell_day_of_month"

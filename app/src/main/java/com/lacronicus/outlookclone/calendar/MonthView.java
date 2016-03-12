@@ -74,7 +74,7 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.setGravity(Gravity.CENTER);
             params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1.0f);
-            params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1.0f);
+            params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1/0f);
             cellWrapper.setLayoutParams(params);
             grid.addView(cellWrapper);
             dayViews[i] = cell;
