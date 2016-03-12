@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
         OutlookCalendar outlookCalendar = new OutlookCalendar(beginningOfYear);
 
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
-        calendarView.setContent(outlookCalendar);
+        calendarView.setContent(chronologyContextProvider, outlookCalendar);
 
         agendaView = (AgendaView) findViewById(R.id.agenda_view);
         agendaView.setContent(chronologyContextProvider, outlookCalendar);

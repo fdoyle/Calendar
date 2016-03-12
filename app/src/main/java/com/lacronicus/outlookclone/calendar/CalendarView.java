@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.lacronicus.outlookclone.R;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 import com.lacronicus.outlookclone.util.SnapScrollListener;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
@@ -24,6 +25,7 @@ public class CalendarView extends FrameLayout implements SnapScrollListener.OnFi
     RecyclerView calendarPager;
     MonthsAdapter monthsAdapter;
     DaySelectedListener listener;
+    ChronologyContextProvider chronologyContextProvider;
 
     public CalendarView(Context context) {
         super(context);
@@ -46,8 +48,9 @@ public class CalendarView extends FrameLayout implements SnapScrollListener.OnFi
         init();
     }
 
-    public void setContent(OutlookCalendar calendar) {
-        monthsAdapter.setContent(calendar);
+    public void setContent(ChronologyContextProvider chronologyContextProvider, OutlookCalendar calendar) {
+        monthsAdapter.setContent(chronologyContextProvider, calendar);
+        this.chronologyContextProvider = chronologyContextProvider;
     }
 
     public void setDaySelectedListener(DaySelectedListener listener) {

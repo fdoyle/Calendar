@@ -9,6 +9,7 @@ import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookMonth;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,10 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
     Map<OutlookMonth, Integer> monthToIndexMap = new HashMap<>();
     OutlookDay currentlySelectedDay;
     DaySelectedListener listener;
+    ChronologyContextProvider chronologyContextProvider;
+
+    public MonthsAdapter() {
+    }
 
     public void setDaySelectedListener(DaySelectedListener listener) {
         this.listener = listener;
@@ -38,7 +43,7 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
     public void onBindViewHolder(EventViewHolder holder, int position) {
         MonthView monthView = (MonthView) holder.itemView;
         if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
-            monthView.setContent(months.get(position).outlookMonth);
+            monthView.setContent(chronologyContextProvider, months.get(position).outlookMonth);
         }
         monthView.setDaySelectedListener(this);
     }
@@ -49,7 +54,7 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
         if (payloads.size() == 0 || !(Boolean) payloads.get(0)) {
             if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
                 monthView.setDaySelectedListener(null);
-                monthView.setContent(months.get(position).outlookMonth);
+                monthView.setContent(chronologyContextProvider, months.get(position).outlookMonth);
                 monthView.setDaySelectedListener(this);
             }
         }
@@ -66,7 +71,8 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
         return months.size();
     }
 
-    public void setContent(OutlookCalendar calendar) {
+    public void setContent(ChronologyContextProvider chronologyContextProvider, OutlookCalendar calendar) {
+        this.chronologyContextProvider = chronologyContextProvider;
         boolean hadExistingContent = months.size() > 0;
         months = new MonthsFlattener().flatten(calendar);
 

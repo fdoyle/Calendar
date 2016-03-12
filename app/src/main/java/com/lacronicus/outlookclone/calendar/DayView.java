@@ -4,22 +4,23 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 
 import com.lacronicus.outlookclone.R;
 
 /**
  * Created by fdoyle on 3/8/16.
  */
-public class DayView extends FrameLayout implements Checkable, CompoundButton.OnCheckedChangeListener {
+public class DayView extends CheckBox implements CompoundButton.OnCheckedChangeListener {
 
-    CheckBox dayOfMonthText;
+    private static final int[] STATE_TODAY = {R.attr.state_today};
+    private static final int[] STATE_WITHIN_MONTH = {R.attr.state_within_month};
+
     DaySelectedListener listener;
-    DayCellData data;
+    DayCellViewModel data;
+
+    boolean isToday = false;
 
     public DayView(Context context) {
         super(context);
@@ -43,20 +44,25 @@ public class DayView extends FrameLayout implements Checkable, CompoundButton.On
     }
 
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.day_cell, this);
-        dayOfMonthText = (CheckBox) findViewById(R.id.day_cell_day_of_month);
-        dayOfMonthText.setOnCheckedChangeListener(this);
+        setOnCheckedChangeListener(this);
     }
 
-    public void setContent(DayCellData data) {
+    public void setContent(DayCellViewModel data) {
         this.data = data;
         String newDayOfMonth = String.valueOf(data.dayOfMonth);
-        if(!dayOfMonthText.getText().equals(newDayOfMonth)) {
-            dayOfMonthText.setText(newDayOfMonth);
+        if(!getText().equals(newDayOfMonth)) {
+            setText(newDayOfMonth);
         }
-        dayOfMonthText.setEnabled(data.isInSelectedMonth);
-        if (dayOfMonthText.isChecked() != data.isSelected) {
-            dayOfMonthText.setChecked(data.isSelected);
+        setEnabled(data.isInSelectedMonth);
+        if (isChecked() != data.isSelected) {
+            setChecked(data.isSelected);
+        }
+
+
+        boolean newIsTodayValue = data.isToday;
+        if(isToday != newIsTodayValue) {
+            isToday = newIsTodayValue;
+            refreshDrawableState();
         }
     }
 
@@ -64,30 +70,22 @@ public class DayView extends FrameLayout implements Checkable, CompoundButton.On
         this.listener = listener;
     }
 
-    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
-        dayOfMonthText.setOnCheckedChangeListener(listener);
-    }
-
-
-    @Override
-    public void setChecked(boolean checked) {
-        dayOfMonthText.setChecked(checked);
-    }
-
-    @Override
-    public boolean isChecked() {
-        return dayOfMonthText.isChecked();
-    }
-
-    @Override
-    public void toggle() {
-        dayOfMonthText.toggle();
-    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(listener != null && data.calendarDay != null) {
             listener.onDaySelected(data.calendarDay);
+        }
+    }
+
+    @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        if(isToday) {
+            final int[] drawableState = super.onCreateDrawableState(extraSpace +1);
+            this.mergeDrawableStates(drawableState, STATE_TODAY);
+            return drawableState;
+        } else {
+            return super.onCreateDrawableState(extraSpace);
         }
     }
 }

@@ -7,12 +7,14 @@ import android.support.v7.widget.GridLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookMonth;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -67,18 +69,20 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
         GridLayout grid = (GridLayout) findViewById(R.id.view_month_grid);
         monthTitle = (TextView) findViewById(R.id.month_grid_title);
         for (int i = 0; i != CELL_COUNT; i++) {
-            DayView cell = new DayView(getContext());
+//            DayView cell = new DayView(getContext());
+            View cellWrapper = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_day_cell, grid, false); //the cellWrapper FrameLayout exists to expand, allowing the cell itself to remain a perfect circle
+            DayView cell = (DayView) cellWrapper.findViewById(R.id.day_cell_day_of_month);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.setGravity(Gravity.CENTER);
             params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1.0f);
             params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1.0f);
-            cell.setLayoutParams(params);
-            grid.addView(cell);
+            cellWrapper.setLayoutParams(params);
+            grid.addView(cellWrapper);
             dayViews[i] = cell;
         }
     }
 
-    public void setContent(OutlookMonth monthToDisplay) {
+    public void setContent(ChronologyContextProvider chronologyContextProvider, OutlookMonth monthToDisplay) {
         currentlySelectedDay = -1;
         indexOfCurrentlySelectedDay = -1;
         indexOfFirstDayInMonth = -1;
@@ -115,7 +119,14 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
             long endOfDayAtIndex = calendarForDayAtIndex.getTimeInMillis();
 
 
-            DayCellData dataForDay = new DayCellData(calendarDayAtIndex, dayOfMonth, startOfDayAtIndex, endOfDayAtIndex, dayHasEvents, isInSelectedMonth, false);
+            DayCellViewModel dataForDay = new DayCellViewModel(calendarDayAtIndex,
+                    dayOfMonth,
+                    startOfDayAtIndex,
+                    endOfDayAtIndex,
+                    dayHasEvents,
+                    isInSelectedMonth,
+                    false,
+                            chronologyContextProvider.isDateWithinToday(calendarForDayAtIndex.getTime()));
             dayViews[i].setContent(dataForDay);
             dayViews[i].setOnDaySelectedListener(this);
         }
