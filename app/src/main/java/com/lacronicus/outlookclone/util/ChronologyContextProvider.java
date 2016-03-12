@@ -22,6 +22,8 @@ public class ChronologyContextProvider {
     private ChronologyContextProvider cachedTomorrow;
     private ChronologyContextProvider cachedYesterday;
 
+    Calendar calendarToCompare = Calendar.getInstance(); //don't make a new Calendar for every comparison, just reuse this one
+
     public ChronologyContextProvider(Date today) {
         beginningOfToday = Calendar.getInstance();
         beginningOfToday.setTime(today);
@@ -34,23 +36,30 @@ public class ChronologyContextProvider {
 
 
     public boolean isDateBeforeToday(Date dateToCompare) {
-        Calendar calendarToCompare = Calendar.getInstance();
+        calendarToCompare = Calendar.getInstance();
         calendarToCompare.setTime(dateToCompare);
         return calendarToCompare.before(beginningOfToday);
     }
 
     public boolean isDateAfterToday(Date dateToCompare) {
-        Calendar calendarToCompare = Calendar.getInstance();
         calendarToCompare.setTime(dateToCompare);
         return calendarToCompare.after(endOfToday);
     }
 
     public boolean isDateWithinToday(Date dateToCheck) {
-        Calendar calendarToCheck = Calendar.getInstance();
-        calendarToCheck.setTime(dateToCheck);
-        return calendarToCheck.equals(beginningOfToday) || calendarToCheck.after(beginningOfToday) && calendarToCheck.before(endOfToday);
+        calendarToCompare.setTime(dateToCheck);
+        return calendarToCompare.equals(beginningOfToday) || calendarToCompare.after(beginningOfToday) && calendarToCompare.before(endOfToday);
     }
 
+    public boolean isDateWithinSameMonth(Date dateToCheck) {
+        calendarToCompare.setTime(dateToCheck);
+        return beginningOfToday.get(Calendar.MONTH) == calendarToCompare.get(Calendar.MONTH) && beginningOfToday.get(Calendar.YEAR) == calendarToCompare.get(Calendar.YEAR);
+    }
+
+    public boolean isDateWithinSameYear(Date dateToCheck) {
+        calendarToCompare.setTime(dateToCheck);
+        return beginningOfToday.get(Calendar.YEAR) == calendarToCompare.get(Calendar.YEAR);
+    }
 
     public ChronologyContextProvider getTomorrow() {
         if (cachedTomorrow == null) {
@@ -68,7 +77,6 @@ public class ChronologyContextProvider {
             cachedYesterday = new ChronologyContextProvider(beginningOfYesterday.getTime());
         }
         return cachedYesterday;
-
     }
 
 

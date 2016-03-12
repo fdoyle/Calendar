@@ -1,20 +1,15 @@
 package com.lacronicus.outlookclone.util;
 
-import com.lacronicus.outlookclone.BuildConfig;
 import com.lacronicus.outlookclone.CalendarUtils;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by fdoyle on 3/11/16.
@@ -60,5 +55,46 @@ public class ChronologyContextProviderTest {
         Date tomorrow = calendar.getTime();
         ChronologyContextProvider provider = new ChronologyContextProvider(today);
         Assert.assertTrue(provider.getYesterday().isDateWithinToday(tomorrow));
+    }
+
+    @Test
+    public void test_that_today_is_within_this_month() throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        CalendarUtils.pushToBeginningOfDay(calendar);
+        Date today = calendar.getTime();
+        ChronologyContextProvider provider = new ChronologyContextProvider(today);
+        Assert.assertTrue(provider.isDateWithinSameMonth(today));
+    }
+
+    @Test
+    public void test_that_today_is_within_this_year() throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        CalendarUtils.pushToBeginningOfDay(calendar);
+        Date today = calendar.getTime();
+        ChronologyContextProvider provider = new ChronologyContextProvider(today);
+        Assert.assertTrue(provider.isDateWithinSameYear(today));
+    }
+
+
+    @Test
+    public void test_that_next_month_is_not_within_this_month() throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        CalendarUtils.pushToBeginningOfDay(calendar);
+        Date today = calendar.getTime();
+        calendar.add(Calendar.MONTH, 1);
+        Date nextMonth = calendar.getTime();
+        ChronologyContextProvider provider = new ChronologyContextProvider(today);
+        Assert.assertFalse(provider.isDateWithinSameMonth(nextMonth));
+    }
+
+    @Test
+    public void test_that_next_year_is_not_within_this_year() throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        CalendarUtils.pushToBeginningOfDay(calendar);
+        Date today = calendar.getTime();
+        calendar.add(Calendar.YEAR, 1);
+        Date nextYear = calendar.getTime();
+        ChronologyContextProvider provider = new ChronologyContextProvider(today);
+        Assert.assertFalse(provider.isDateWithinSameMonth(nextYear));
     }
 }

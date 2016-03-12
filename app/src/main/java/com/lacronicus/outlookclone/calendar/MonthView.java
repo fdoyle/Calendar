@@ -69,7 +69,6 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
         GridLayout grid = (GridLayout) findViewById(R.id.view_month_grid);
         monthTitle = (TextView) findViewById(R.id.month_grid_title);
         for (int i = 0; i != CELL_COUNT; i++) {
-//            DayView cell = new DayView(getContext());
             View cellWrapper = LayoutInflater.from(getContext()).inflate(R.layout.grid_item_day_cell, grid, false); //the cellWrapper FrameLayout exists to expand, allowing the cell itself to remain a perfect circle
             DayView cell = (DayView) cellWrapper.findViewById(R.id.day_cell_day_of_month);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -87,7 +86,13 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
         indexOfCurrentlySelectedDay = -1;
         indexOfFirstDayInMonth = -1;
         maxDaysInMonth = monthToDisplay.getStartOfMonth().getActualMaximum(Calendar.DAY_OF_MONTH);
-        monthTitle.setText(monthToDisplay.getStartOfMonth().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+
+        String title = monthToDisplay.getStartOfMonth().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+
+        if (!chronologyContextProvider.isDateWithinSameYear(monthToDisplay.getStartOfMonth().getTime())) {
+            title = title + " " + monthToDisplay.getStartOfMonth().get(Calendar.YEAR);
+        }
+        monthTitle.setText(title);
         this.month = monthToDisplay;
         Calendar firstDayOfMonth = monthToDisplay.getStartOfMonth();
         firstDayOfMonth.setFirstDayOfWeek(Calendar.SUNDAY);//if you wanted to change the first day of the week, this is where you'd do it. Change this, everything "should" just fall into place
@@ -115,9 +120,13 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
                 dayHasEvents = false; //not in this month, don't display anything
             }
             int dayOfMonth = calendarForDayAtIndex.get(Calendar.DAY_OF_MONTH);
+            boolean isInToday = chronologyContextProvider.isDateWithinToday(calendarForDayAtIndex.getTime());
             calendarForDayAtIndex.add(Calendar.DAY_OF_YEAR, 1); //increment to end of day/beginning of next day
-            long endOfDayAtIndex = calendarForDayAtIndex.getTimeInMillis();
 
+            //don't include beginning of next day within today
+            calendarForDayAtIndex.add(Calendar.MILLISECOND, -1);
+            long endOfDayAtIndex = calendarForDayAtIndex.getTimeInMillis();
+            calendarForDayAtIndex.add(Calendar.MILLISECOND, 1);
 
             DayCellViewModel dataForDay = new DayCellViewModel(calendarDayAtIndex,
                     dayOfMonth,
@@ -126,7 +135,8 @@ public class MonthView extends FrameLayout implements DaySelectedListener {
                     dayHasEvents,
                     isInSelectedMonth,
                     false,
-                            chronologyContextProvider.isDateWithinToday(calendarForDayAtIndex.getTime()));
+                    isInToday);
+
             dayViews[i].setContent(dataForDay);
             dayViews[i].setOnDaySelectedListener(this);
         }
