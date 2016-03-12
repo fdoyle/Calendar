@@ -1,4 +1,4 @@
-package com.lacronicus.outlookclone;
+package com.lacronicus.outlookclone.util;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

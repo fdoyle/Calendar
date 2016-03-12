@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.lacronicus.outlookclone.R;
-import com.lacronicus.outlookclone.SnapScrollListener;
+import com.lacronicus.outlookclone.util.SnapScrollListener;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
 
