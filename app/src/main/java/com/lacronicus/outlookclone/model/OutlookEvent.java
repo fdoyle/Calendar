@@ -10,15 +10,22 @@ import java.util.Calendar;
 public class OutlookEvent implements Comparable<OutlookEvent> {
     public final Calendar startTime;
     public final OutlookDay dayOfStart;
+    String title;
+
 
     public OutlookEvent(OutlookDay dayOfStart, Event event) {
         this.dayOfStart = dayOfStart;
         startTime = Calendar.getInstance();
         startTime.setTime(event.getDate());
+        this.title = event.subject;
     }
 
     @Override
     public int compareTo(OutlookEvent another) {
         return startTime.compareTo(another.startTime);
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

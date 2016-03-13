@@ -8,7 +8,7 @@
     <color name="transparentColorAccent">#66FF4081</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#727272</color>
-    <color name="divider">#B6B6B6</color>
+    <color name="divider">#DDD</color>
 
     <color name="day_cell_in_month_selected">#fff</color>
     <color name="day_cell_in_month">#232323</color>

@@ -2,11 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_event"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
     <TextView
-        tools:text="this is an event"
+        android:id="@+id/agenda_event_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        tools:text="3:00 PM" />
+
+    <TextView
+        android:id="@+id/agenda_event_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" />
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        tools:text="this is an event" />
 </LinearLayout>
