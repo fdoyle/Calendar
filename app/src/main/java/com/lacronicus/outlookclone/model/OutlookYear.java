@@ -1,5 +1,7 @@
 package com.lacronicus.outlookclone.model;
 
+import android.util.Log;
+
 import com.lacronicus.outlookclone.api.model.Event;
 
 import java.util.ArrayList;
@@ -15,13 +17,13 @@ public class OutlookYear {
 
 
     public OutlookYear(Calendar beginningOfYear) {
-        this.beginningOfYear = (Calendar) beginningOfYear.clone();
+        this.beginningOfYear = (Calendar) beginningOfYear.clone(); //assume unsafe
         this.months = new ArrayList<>();
-        // todo add months
-        Calendar beginningOfMonthAtIndex = (Calendar) beginningOfYear.clone();
-        for(int i = 1; i < 13; i ++) {
-            beginningOfMonthAtIndex.set(Calendar.MONTH, i + 1);
-            months.add(new OutlookMonth(this, beginningOfMonthAtIndex));
+        Calendar beginningOfMonthAtIndex = (Calendar) this.beginningOfYear.clone();
+        for(int i = 0; i < 12; i ++) {
+            beginningOfMonthAtIndex.set(Calendar.MONTH, i);
+            Log.d("TAG", "creating month at " + beginningOfMonthAtIndex.getTime());
+            months.add(new OutlookMonth(this, (Calendar) beginningOfMonthAtIndex.clone()));
         }
     }
 
@@ -30,7 +32,7 @@ public class OutlookYear {
     }
 
     public void addEvent(Event eventToAdd) {
-
+        months.get(eventToAdd.getStartAsCalendar().get(Calendar.MONTH) - Calendar.JANUARY).addEvent(eventToAdd);
     }
 
     public void clearEvents() {

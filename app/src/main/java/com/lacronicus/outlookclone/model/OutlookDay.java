@@ -1,5 +1,7 @@
 package com.lacronicus.outlookclone.model;
 
+import com.lacronicus.outlookclone.api.model.Event;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,6 +38,11 @@ public class OutlookDay {
 
     public OutlookDay(OutlookMonth month, Calendar startOfDay) {
         this(month, startOfDay, new ArrayList<OutlookEvent>());
+    }
+
+    public void addEvent(Event event) {
+        OutlookEvent outlookEvent = new OutlookEvent(this, event);
+        this.events.add(outlookEvent);
     }
 
     public SortedSet<OutlookEvent> getEvents() {

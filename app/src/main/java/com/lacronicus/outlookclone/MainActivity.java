@@ -43,16 +43,16 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
         super.onCreate(savedInstanceState);
         chronologyContextProvider = new ChronologyContextProvider(new Date());//todo inject this object, rather than creating it here. This would allow for inst tests where "today" doesn't vary
         setContentView(R.layout.activity_main);
-        loadData();
 
         Calendar beginningOfYear = Calendar.getInstance();
         CalendarUtils.pushToBeginningOfYear(beginningOfYear);
 
-        outlookCalendar = new OutlookCalendar(Calendar.getInstance());
+
+        outlookCalendar = new OutlookCalendar(beginningOfYear);
 
         Calendar startOfMonth = Calendar.getInstance();
         startOfMonth.set(Calendar.DAY_OF_MONTH, 1);
-        OutlookCalendar outlookCalendar = new OutlookCalendar(beginningOfYear);
+        outlookCalendar = new OutlookCalendar(beginningOfYear);
 
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
         calendarView.setContent(chronologyContextProvider, outlookCalendar);
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
 
         agendaView.setOnScrollListener(scrollListener);
         calendarView.setDaySelectedListener(this);
+        loadData();
     }
 
     public class MainActivityOnScrollListener extends RecyclerView.OnScrollListener {
@@ -134,6 +135,11 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
 
         try {
             EventList events = api.getEvents(null, null, null, null);
+            outlookCalendar.addItemsToCalendar(events.value);
+            calendarView.setContent(chronologyContextProvider, outlookCalendar);
+            agendaView.setContent(chronologyContextProvider, outlookCalendar);
+
+
         } catch (IOException ioException) {
             setErrorState();
         }
