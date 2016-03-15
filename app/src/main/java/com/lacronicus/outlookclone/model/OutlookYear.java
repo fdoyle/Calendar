@@ -22,7 +22,6 @@ public class OutlookYear {
         Calendar beginningOfMonthAtIndex = (Calendar) this.beginningOfYear.clone();
         for(int i = 0; i < 12; i ++) {
             beginningOfMonthAtIndex.set(Calendar.MONTH, i);
-            Log.d("TAG", "creating month at " + beginningOfMonthAtIndex.getTime());
             months.add(new OutlookMonth(this, (Calendar) beginningOfMonthAtIndex.clone()));
         }
     }

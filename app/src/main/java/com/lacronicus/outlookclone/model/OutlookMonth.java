@@ -23,7 +23,6 @@ public class OutlookMonth {
         Calendar dayOfMonth = (Calendar) this.startOfMonth.clone();
         for(int i = 0; i != daysInMonth; i ++) {
             dayOfMonth.set(Calendar.DAY_OF_MONTH, i + 1);
-            Log.d("TAG", "creating day at " + dayOfMonth.getTime());
             days.add(new OutlookDay(this, dayOfMonth));
         }
     }
