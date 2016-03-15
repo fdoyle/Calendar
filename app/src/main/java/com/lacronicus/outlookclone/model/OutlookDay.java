@@ -27,7 +27,7 @@ public class OutlookDay {
     }
 
     /**
-    * Do not modify this calendar
+     * Do not modify this Date
      *
      * (ideally, we'd just make a clone so it can't be modified, but since this will be called
      * while scrolling to get day header text, we'd be making a ton of objects)

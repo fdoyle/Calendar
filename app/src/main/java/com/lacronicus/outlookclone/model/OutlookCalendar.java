@@ -13,10 +13,10 @@ import java.util.TreeMap;
  * At any given time, it will contain three years worth of data: The year being looked at currently, the year before, and the year after. This will be updated as the user navigates.
  *
  */
-public class OutlookCalendar {
-    TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years
+public class OutlookCalendar /*this does not have anything to do with the Android calendar*/{
+    private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years //todo make this a sparsearray
 
-    Calendar startOfMiddleYear;
+    private final Calendar startOfMiddleYear;
 
     public OutlookCalendar(Calendar startOfMiddleYear) {
         this.startOfMiddleYear = (Calendar) startOfMiddleYear.clone();

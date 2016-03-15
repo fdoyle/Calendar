@@ -6,8 +6,11 @@ Current work is probably on develop
 
 This document details some preparations made before and during development of the test project
 
+## Building
+./gradlew installDebug
+
 ## A bit about me
-I graduated in 2012 and I've worked as a Software Engineer for WillowTree since. In that time, I've worked directly with numerous clients to build 4 Android apps from scratch, with a fifth that should be out shortly, as well as adding features and doing maintenance on numerous others. On those projects, I've worked alone, as a part of a team, and as a platform lead. 
+I graduated in 2012 and I've worked as a Software Engineer for WillowTree since. In that time, I've worked directly with numerous clients to build 4 Android apps from scratch, with a fifth that should be in the store shortly, as well as adding features and doing maintenance on numerous others. On those projects, I've worked alone, as a part of a team, and as a platform lead. 
 
 Outside of work, I still enjoy writing software, building simple Android demos, learning and tinkering with new technologies, etc. I've recently started learning about web technologies, building some basic React webapps. 
 
@@ -77,6 +80,12 @@ Switching to a more directly-accessible gridlayout improved performance signific
 
 ### todos
 There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
+
+### potential optimizations 
+ - These are things that could improve performance, if necessary, but would only serve to clutter the code in a proof of concept. 
+Object pool for Dates and Calendars
+custom viewgroup for CalendarView, instead of a gridlayout.
+
 
 *Develop and Master are both building on March 10. Currently, lint checks can fail the build (a personal preference) but that means differing lint versions can break things. If anything's broken, let me know and we'll get it straightened out* 
 

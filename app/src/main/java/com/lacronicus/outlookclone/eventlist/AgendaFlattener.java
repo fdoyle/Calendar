@@ -38,21 +38,21 @@ public class AgendaFlattener {
         return new Pair<>(items, outlookDayToIndexMap);
     }
 
-    public void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookYear year) {
+    private void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookYear year) {
         //years are not represented in the list
         for (OutlookMonth month : year.getMonths()) {
             flatten(items, outlookDayToIndexMap, month);
         }
     }
 
-    public void  flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookMonth month) {
+    private void  flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookMonth month) {
         //months are not represented in the list
         for (OutlookDay day : month.getDays()) {
             flatten(items, outlookDayToIndexMap, day);
         }
     }
 
-    public void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookDay day) {
+    private void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookDay day) {
         items.add(new DayHeaderViewModel(chronologyContextProvider, day));
         outlookDayToIndexMap.put(day, items.size() - 1);
 
@@ -66,7 +66,7 @@ public class AgendaFlattener {
         }
     }
 
-    public void flatten(List<AgendaViewModel> items, OutlookEvent event) {
+    private void flatten(List<AgendaViewModel> items, OutlookEvent event) {
         items.add(new EventViewModel(event));
     }
 
