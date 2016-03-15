@@ -1,5 +1,7 @@
 package com.lacronicus.outlookclone.model;
 
+import android.util.SparseArray;
+
 import com.lacronicus.outlookclone.api.model.Event;
 import com.lacronicus.outlookclone.eventlist.viewmodel.AgendaViewModel;
 
@@ -14,7 +16,7 @@ import java.util.TreeMap;
  *
  */
 public class OutlookCalendar /*this does not have anything to do with the Android calendar*/{
-    private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years //todo make this a sparsearray
+    private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years 
 
     private final Calendar startOfMiddleYear;
 
