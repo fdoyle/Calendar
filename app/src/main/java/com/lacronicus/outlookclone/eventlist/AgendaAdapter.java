@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * Adapter for the list of items in the Agenda View
  */
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.EventListItemViewHolder>{
 

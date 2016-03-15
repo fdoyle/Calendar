@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by fdoyle on 3/10/16.
+ * View displaying a particular month in a Calendar
  */
 public class MonthView extends FrameLayout implements DaySelectedListener {
     public static final int DAYS_PER_WEEK = 7;

@@ -20,7 +20,7 @@ public class Event {
     public String subject;
     @SerializedName("Start")
     private OutlookDate start;
-//    @SerializedName("End") //this needs a custom deserializer, as it's sometimes an OutlookDate, and sometimes it's just a string.
+//    @SerializedName("End") //todo: this needs a custom deserializer, as it's sometimes an OutlookDate, and sometimes it's just a string.
 //    public OutlookDate end;
 
     Calendar memoizedCalendar;

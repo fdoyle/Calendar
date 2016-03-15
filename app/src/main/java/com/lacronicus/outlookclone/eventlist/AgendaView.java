@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by fdoyle on 3/10/16.
+ * Container for the logic associated with the Calendar View
  */
 public class AgendaView extends FrameLayout {
     public static final String PROPERTY_LIST_PADDING_TOP = "listPaddingTop";

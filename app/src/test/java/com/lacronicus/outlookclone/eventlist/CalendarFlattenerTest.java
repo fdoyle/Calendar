@@ -1,6 +1,6 @@
 package com.lacronicus.outlookclone.eventlist;
 
-import com.lacronicus.outlookclone.CalendarUtils;
+import com.lacronicus.outlookclone.util.CalendarUtils;
 import com.lacronicus.outlookclone.eventlist.viewmodel.AgendaViewModel;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.util.ChronologyContextProvider;

@@ -1,7 +1,5 @@
 package com.lacronicus.outlookclone.util;
 
-import com.lacronicus.outlookclone.CalendarUtils;
-
 import java.util.Calendar;
 import java.util.Date;
 

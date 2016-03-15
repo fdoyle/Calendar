@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by fdoyle on 3/8/16.
+ * Model representing a single year inthe OutlookCalendar
  */
 public class OutlookYear {
     List<OutlookMonth> months; // dense list of months

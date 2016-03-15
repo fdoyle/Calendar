@@ -17,8 +17,8 @@ public class DayView extends CheckBox implements CompoundButton.OnCheckedChangeL
     private static final int[] STATE_TODAY = {R.attr.state_today};
     private static final int[] STATE_WITHIN_MONTH = {R.attr.state_within_month};
 
-    DaySelectedListener listener;
-    DayCellViewModel data;
+    DaySelectedListener daySel;
+    DayCellViewModel viewModel;
 
     boolean isToday = false;
 
@@ -48,7 +48,7 @@ public class DayView extends CheckBox implements CompoundButton.OnCheckedChangeL
     }
 
     public void setContent(DayCellViewModel data) {
-        this.data = data;
+        this.viewModel = data;
         String newDayOfMonth = String.valueOf(data.dayOfMonth);
         if(!getText().equals(newDayOfMonth)) {
             setText(newDayOfMonth);
@@ -67,14 +67,14 @@ public class DayView extends CheckBox implements CompoundButton.OnCheckedChangeL
     }
 
     public void setOnDaySelectedListener(DaySelectedListener listener) {
-        this.listener = listener;
+        this.daySel = listener;
     }
 
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(listener != null && data.calendarDay != null) {
-            listener.onDaySelected(data.calendarDay);
+        if(daySel != null && viewModel.calendarDay != null) {
+            daySel.onDaySelected(viewModel.calendarDay);
         }
     }
 

@@ -13,7 +13,6 @@ import java.util.TreeMap;
  * OutlookCalendar represents the data displayed in the Monthly Calendar and Event list views.
  *
  * At any given time, it will contain three years worth of data: The year being looked at currently, the year before, and the year after. This will be updated as the user navigates.
- *
  */
 public class OutlookCalendar /*this does not have anything to do with the Android calendar*/{
     private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years

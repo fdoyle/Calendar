@@ -6,7 +6,7 @@ import com.lacronicus.outlookclone.model.OutlookEvent;
 import java.text.SimpleDateFormat;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * ViewModel providing the data for a single Event in the Agenda View
  */
 public class EventViewModel implements AgendaViewModel {
 

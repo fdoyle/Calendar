@@ -1,7 +1,5 @@
 package com.lacronicus.outlookclone.util;
 
-import com.lacronicus.outlookclone.CalendarUtils;
-
 import junit.framework.Assert;
 
 import org.junit.Test;

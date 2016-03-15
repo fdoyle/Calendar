@@ -3,7 +3,7 @@ package com.lacronicus.outlookclone.calendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
 
 /**
- * Created by fdoyle on 3/10/16.
+ * Callback object when a day is selected in a View
  */
 public interface DaySelectedListener {
     void onDaySelected( OutlookDay day);

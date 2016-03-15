@@ -6,7 +6,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
 /**
- * Created by fdoyle on 3/8/16.
+ * A ScrollListener that can be attached to a recyclerview that will, when the recyclerview reaches its IDLE state, animate that recyclerview so that the top item is aligned with the top edge
  */
 public class SnapScrollListener extends RecyclerView.OnScrollListener {
     RecyclerView listView;

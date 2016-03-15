@@ -24,7 +24,7 @@ public class CalendarView extends FrameLayout implements SnapScrollListener.OnFi
 
     RecyclerView calendarPager;
     MonthsAdapter monthsAdapter;
-    DaySelectedListener listener;
+    DaySelectedListener daySelectedListener;
     ChronologyContextProvider chronologyContextProvider;
 
     public CalendarView(Context context) {
@@ -54,7 +54,7 @@ public class CalendarView extends FrameLayout implements SnapScrollListener.OnFi
     }
 
     public void setDaySelectedListener(DaySelectedListener listener) {
-        this.listener = listener;
+        this.daySelectedListener = listener;
     }
 
     public void setSelectedDay(OutlookDay newSelectedDay) {
@@ -91,8 +91,8 @@ public class CalendarView extends FrameLayout implements SnapScrollListener.OnFi
 
     @Override
     public void onDaySelected(OutlookDay day) {
-        if(listener != null) {
-            listener.onDaySelected(day);
+        if(daySelectedListener != null) {
+            daySelectedListener.onDaySelected(day);
         }
     }
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Date;
 
 /**
- * Created by fdoyle on 3/7/16.
+ * interface representing a source of Events
  */
 public interface OutlookApi {
 

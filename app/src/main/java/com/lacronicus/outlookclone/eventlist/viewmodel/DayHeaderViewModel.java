@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * View Model providing the data for a Day Header View
  */
 public class DayHeaderViewModel implements AgendaViewModel {
     OutlookDay day;

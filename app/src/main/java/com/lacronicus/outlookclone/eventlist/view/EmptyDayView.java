@@ -11,7 +11,7 @@ import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.eventlist.viewmodel.EmptyDayViewModel;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * View representing a lack of data in a day in the Agenda View
  */
 public class EmptyDayView extends FrameLayout {
     public EmptyDayView(Context context) {

@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * Header for a given days worth of data in the Agenda View
  */
 public class DayHeaderView extends LinearLayout {
     private static final int[] STATE_TODAY = {R.attr.state_today};

@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
+/**
+ * Model representing a single month in the OutlookCalendar model
+ *
+ * */
 public class OutlookMonth {
     OutlookYear year;
     final Calendar startOfMonth;

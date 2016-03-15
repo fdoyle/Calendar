@@ -4,7 +4,7 @@ import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 /**
- * Created by fdoyle on 3/10/16.
+ * ViewModel representing the data displayed in a Day Cell View
  */
 public class DayCellViewModel {
     public final int dayOfMonth;

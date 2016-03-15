@@ -5,7 +5,7 @@ import com.lacronicus.outlookclone.api.model.Event;
 import java.util.Calendar;
 
 /**
- * Created by fdoyle on 3/8/16.
+ * Model representing a single event in the OutlookCalendar
  */
 public class OutlookEvent implements Comparable<OutlookEvent> {
     public final Calendar startTime;

@@ -4,7 +4,7 @@ import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookMonth;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * ViewModel providing data for a Calendar Month view
  */
 public class CalendarMonthViewModel {
     public final OutlookMonth outlookMonth;

@@ -24,14 +24,14 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
     List<CalendarMonthViewModel> months = new ArrayList<>();
     Map<OutlookMonth, Integer> monthToIndexMap = new HashMap<>();
     OutlookDay currentlySelectedDay;
-    DaySelectedListener listener;
+    DaySelectedListener daySelectedListener;
     ChronologyContextProvider chronologyContextProvider;
 
     public MonthsAdapter() {
     }
 
     public void setDaySelectedListener(DaySelectedListener listener) {
-        this.listener = listener;
+        this.daySelectedListener = listener;
     }
 
     @Override
@@ -111,8 +111,8 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
     @Override
     public void onDaySelected(OutlookDay day) {
-        if (listener != null) {
-            listener.onDaySelected(day);
+        if (daySelectedListener != null) {
+            daySelectedListener.onDaySelected(day);
         }
     }
 

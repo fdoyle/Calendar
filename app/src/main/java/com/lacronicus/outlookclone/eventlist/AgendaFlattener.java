@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Flattens a Calendar tree for use in a Linear Recyclerview
+ * Flattens a OutlookCalendar tree for use in a Linear Recyclerview
  */
 public class AgendaFlattener {
     ChronologyContextProvider chronologyContextProvider;

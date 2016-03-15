@@ -12,7 +12,7 @@ import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.eventlist.viewmodel.EventViewModel;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * View representing a single event in the Agenda View
  */
 public class EventView extends FrameLayout {
 

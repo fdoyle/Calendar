@@ -10,7 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * Created by fdoyle on 3/8/16.
+ * Model representing a single day in the OutlookCalendar
  */
 public class OutlookDay {
     final Calendar startOfDay;

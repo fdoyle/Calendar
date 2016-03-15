@@ -1,7 +1,6 @@
 package com.lacronicus.outlookclone.model;
 
-import com.ibm.icu.impl.CalendarUtil;
-import com.lacronicus.outlookclone.CalendarUtils;
+import com.lacronicus.outlookclone.util.CalendarUtils;
 
 import junit.framework.Assert;
 
@@ -11,8 +10,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
 import java.util.Calendar;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by fdoyle on 3/9/16.
