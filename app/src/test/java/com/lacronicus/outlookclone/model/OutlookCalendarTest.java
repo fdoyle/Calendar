@@ -27,8 +27,8 @@ public class OutlookCalendarTest {
         calendar.set(Calendar.DAY_OF_YEAR, 1); //first day of year, not index 1
         calendar.set(Calendar.YEAR, 2000);
         OutlookCalendar outlookCalendar = new OutlookCalendar(calendar);
-        Assert.assertEquals(3, outlookCalendar.calendarYears.keySet().size());
-        Assert.assertTrue(outlookCalendar.calendarYears.keySet().containsAll(Arrays.asList(1999, 2000, 2001)));
+        Assert.assertEquals(3, outlookCalendar.getYears().keySet().size());
+        Assert.assertTrue(outlookCalendar.getYears().keySet().containsAll(Arrays.asList(1999, 2000, 2001)));
     }
 
 }

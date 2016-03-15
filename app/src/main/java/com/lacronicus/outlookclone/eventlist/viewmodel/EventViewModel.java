@@ -27,6 +27,6 @@ public class EventViewModel implements AgendaViewModel {
     }
 
     public String getTitle() {
-        return event.getTitle();
+        return event.getSubject();
     }
 }
