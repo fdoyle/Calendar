@@ -23,6 +23,7 @@ public class Event {
 //    @SerializedName("End") //this needs a custom deserializer, as it's sometimes an OutlookDate, and sometimes it's just a string.
 //    public OutlookDate end;
 
+    Calendar memoizedCalendar;
 
     public Date getDate() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US); //always parse with US
@@ -34,10 +35,11 @@ public class Event {
     }
 
 
-    //todo memoize this?
     public Calendar getStartAsCalendar() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(getDate());
-        return calendar;
+        if(memoizedCalendar == null) {
+            memoizedCalendar = Calendar.getInstance();
+            memoizedCalendar.setTime(getDate());
+        }
+        return memoizedCalendar;
     }
 }
