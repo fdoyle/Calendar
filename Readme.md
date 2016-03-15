@@ -79,7 +79,7 @@ originally went with a recyclerview based implementation, but that ended up bein
 Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code.
 
 ### todos
-There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
+There are some //todo's in the code. These todo's represent things that are outside of the scope of this demo, but still worthy of recognition. 
 
 ### potential optimizations 
  - These are things that could improve performance, if necessary, but would only serve to clutter the code in a proof of concept. 

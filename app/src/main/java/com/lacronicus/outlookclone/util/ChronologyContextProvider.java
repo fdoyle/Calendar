@@ -6,14 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * todo give this a better name
  * <p/>
  * Takes a Date, tells whether another Date is on the same day, the previous day, the day after
  * <p/>
  * inject this into objects to give them a sense of what "Today", "Yesterday", and "Tomorrow" mean
  * without having them rely directly on system clock
  * <p/>
- * todo unit test this
  */
 public class ChronologyContextProvider {
     Calendar beginningOfToday;

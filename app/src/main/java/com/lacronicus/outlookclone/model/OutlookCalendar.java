@@ -16,7 +16,7 @@ import java.util.TreeMap;
  *
  */
 public class OutlookCalendar /*this does not have anything to do with the Android calendar*/{
-    private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years 
+    private final TreeMap<Integer, OutlookYear> calendarYears; //sparse map of years
 
     private final Calendar startOfMiddleYear;
 
