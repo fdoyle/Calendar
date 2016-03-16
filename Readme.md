@@ -1,9 +1,4 @@
 # Readme.txt
-
-*just a heads up, this is a work in progress. Just granting access now that there's something to see*
-
-Current work is probably on develop
-
 This document details some preparations made before and during development of the test project
 
 ## Building
@@ -66,7 +61,7 @@ any year will have models for all of its months, and any month will have models 
 
 If it became a burden, you could probably make most of these collections sparse, eliminating days/months/years without any data inside them. 
 
-This model lends itself well to an Observable model, where data is calculated or pulled from the network as needed. If you're about to load a month you don't have, you request it, and the UI will wait. 
+This model lends itself well to an Observable model, where data is calculated or pulled from the network as needed. If you're about to load a month you don't have, you request it, and the UI will wait in a loading state. 
 
 ### On Creating a lot of objects
 I very much agree with the idea that you shouldn't optimize until you can prove, through benchmarks, that you need to. 
@@ -74,7 +69,7 @@ I very much agree with the idea that you shouldn't optimize until you can prove,
 The demo creates a fairly substantial backing model to keep track of all of its events. It is likely very possible to optimize this, but I think it would be at the expense of some amount of clarity. 
 
 ### Calendar PageView
-originally went with a recyclerview based implementation, but that ended up being slow since it required calling notifydatasetchanged whenever the date was changed for the calendar. 
+I originally went with a recyclerview based implementation, but that ended up being slow since it required calling notifydatasetchanged whenever the date was changed for the calendar. 
 
 Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code.
 
@@ -90,5 +85,5 @@ Load data/flatten data asynchronously. (noticeable delay on nexus S while loadin
 
 
 
-*Develop and Master are both building on March 10. Currently, lint checks can fail the build (a personal preference) but that means differing lint versions can break things. If anything's broken, let me know and we'll get it straightened out* 
+*Develop and Master are both building on March 15. Currently, failing lint checks fails the build and that means differing lint versions can break things. If anything's broken, let me know and we'll get it straightened out* 
 
