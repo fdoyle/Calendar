@@ -1,12 +1,17 @@
 package com.lacronicus.outlookclone.model;
 
+import android.util.Log;
+
 import com.lacronicus.outlookclone.api.model.Event;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
+/**
+ * Model representing a single month in the OutlookCalendar model
+ *
+ * */
 public class OutlookMonth {
     OutlookYear year;
     final Calendar startOfMonth;
@@ -14,10 +19,11 @@ public class OutlookMonth {
 
     public OutlookMonth(OutlookYear year, Calendar startOfMonth, List<OutlookEvent> eventsInMonth) {
         this.year = year;
-        this.startOfMonth = (Calendar) startOfMonth.clone();
+        this.startOfMonth = (Calendar) startOfMonth.clone(); //assume unsafe
+        startOfMonth = null;
         days = new ArrayList<>();
-        int daysInMonth = startOfMonth.getActualMaximum(Calendar.DAY_OF_MONTH);
-        Calendar dayOfMonth = (Calendar) startOfMonth.clone();
+        int daysInMonth = this.startOfMonth.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Calendar dayOfMonth = (Calendar) this.startOfMonth.clone();
         for(int i = 0; i != daysInMonth; i ++) {
             dayOfMonth.set(Calendar.DAY_OF_MONTH, i + 1);
             days.add(new OutlookDay(this, dayOfMonth));
@@ -32,8 +38,8 @@ public class OutlookMonth {
         return days;
     }
 
-    public void addEvent(Event event) {
-        //todo
+    public void addEvent(Event eventToAdd) {
+        days.get(eventToAdd.getStartAsCalendar().get(Calendar.DAY_OF_MONTH) - 1).addEvent(eventToAdd);
     }
 
     public Calendar getStartOfMonth() {

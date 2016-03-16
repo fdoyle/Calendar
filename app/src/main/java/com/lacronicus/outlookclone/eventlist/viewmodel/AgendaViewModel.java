@@ -3,7 +3,7 @@ package com.lacronicus.outlookclone.eventlist.viewmodel;
 import com.lacronicus.outlookclone.model.OutlookDay;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * interface for all ViewModels for data in the Agenda View
  */
 public interface AgendaViewModel {
     OutlookDay getAssociatedDay();

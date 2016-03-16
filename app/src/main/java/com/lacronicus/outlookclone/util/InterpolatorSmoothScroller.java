@@ -1,11 +1,11 @@
-package com.lacronicus.outlookclone;
+package com.lacronicus.outlookclone.util;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Interpolator;
 
 /**
- * Created by fdoyle on 3/8/16.
+ * A recyclerview SmoothScroller that allows for more natural animation between items
  */
 public class InterpolatorSmoothScroller extends RecyclerView.SmoothScroller {
     Interpolator interpolator;

@@ -1,7 +1,8 @@
 package com.lacronicus.outlookclone;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -17,9 +18,13 @@ import com.lacronicus.outlookclone.calendar.DaySelectedListener;
 import com.lacronicus.outlookclone.eventlist.AgendaView;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
+import com.lacronicus.outlookclone.util.CalendarUtils;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
+import com.lacronicus.outlookclone.util.AnimatorListener;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements DaySelectedListener {
 
@@ -32,36 +37,42 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
 
     MainActivityOnScrollListener scrollListener = new MainActivityOnScrollListener();
 
+    ChronologyContextProvider chronologyContextProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        chronologyContextProvider = new ChronologyContextProvider(new Date());//todo inject this object, rather than creating it here. This would allow for inst tests where "today" doesn't vary
         setContentView(R.layout.activity_main);
-        loadData();
 
         Calendar beginningOfYear = Calendar.getInstance();
         CalendarUtils.pushToBeginningOfYear(beginningOfYear);
 
-        outlookCalendar = new OutlookCalendar(Calendar.getInstance());
+
+        outlookCalendar = new OutlookCalendar(beginningOfYear);
 
         Calendar startOfMonth = Calendar.getInstance();
         startOfMonth.set(Calendar.DAY_OF_MONTH, 1);
-        OutlookCalendar outlookCalendar = new OutlookCalendar(beginningOfYear);
+        outlookCalendar = new OutlookCalendar(beginningOfYear);
 
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
-        calendarView.setContent(outlookCalendar);
+        calendarView.setContent(chronologyContextProvider, outlookCalendar);
 
         agendaView = (AgendaView) findViewById(R.id.agenda_view);
-        agendaView.setContent(outlookCalendar);
+        agendaView.setContent(chronologyContextProvider, outlookCalendar);
 
         agendaView.setOnScrollListener(scrollListener);
         calendarView.setDaySelectedListener(this);
+        loadData();
     }
 
     public class MainActivityOnScrollListener extends RecyclerView.OnScrollListener {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                OutlookDay topmostDay = agendaView.getDayForTopmostView();
+            OutlookDay topmostDay = agendaView.getDayForTopmostView();
+            if(topmostDay != null) {
                 calendarView.setSelectedDay(topmostDay);
+            }
         }
     }
 
@@ -86,7 +97,38 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
     }
 
     public void toggleCalendar() {
-        calendarView.setVisibility(calendarView.getVisibility() == View.VISIBLE ? View.GONE :View.VISIBLE);
+        if (calendarView.getVisibility() != View.VISIBLE) {
+            //enter animation
+            calendarView.setVisibility(View.VISIBLE);
+            calendarView.setTranslationY(-calendarView.getHeight());
+            calendarView.setTranslationX(calendarView.getWidth() / 3);
+            calendarView.clearAnimation();
+            calendarView.animate()
+                    .translationY(0)
+                    .translationX(0)
+                    .scaleX(1)
+                    .scaleY(1)
+                    .setDuration(300)
+                    .setListener(null)
+                    .start();
+            ObjectAnimator.ofInt(agendaView, AgendaView.PROPERTY_LIST_PADDING_TOP, calendarView.getHeight()).setDuration(300).start() ;
+        } else {
+            //exit animation
+            ObjectAnimator.ofInt(agendaView, AgendaView.PROPERTY_LIST_PADDING_TOP, 0).setDuration(300).start();
+            calendarView.animate()
+                    .translationY(-calendarView.getHeight())
+                    .translationX(calendarView.getWidth() / 3)
+                    .scaleX(0.2f)
+                    .scaleY(0.2f)
+                    .setDuration(300)
+                    .setListener(new AnimatorListener() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            calendarView.setVisibility(View.GONE);
+                        }
+                    }).start();
+        }
+
     }
 
     public void loadData() {
@@ -94,12 +136,17 @@ public class MainActivity extends AppCompatActivity implements DaySelectedListen
 
         try {
             EventList events = api.getEvents(null, null, null, null);
+            outlookCalendar.addItemsToCalendar(events.value);
+            calendarView.setContent(chronologyContextProvider, outlookCalendar);
+            agendaView.setContent(chronologyContextProvider, outlookCalendar);
+
+
         } catch (IOException ioException) {
             setErrorState();
         }
     }
 
     public void setErrorState() {
-
+        //todo add error state
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * Flattens an OutlookCalendar for use in a CalendarView
  */
 public class MonthsFlattener {
 

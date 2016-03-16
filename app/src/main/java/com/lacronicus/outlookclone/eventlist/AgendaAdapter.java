@@ -2,9 +2,11 @@ package com.lacronicus.outlookclone.eventlist;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.eventlist.view.DayHeaderView;
 import com.lacronicus.outlookclone.eventlist.view.EmptyDayView;
 import com.lacronicus.outlookclone.eventlist.view.EventView;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * Adapter for the list of items in the Agenda View
  */
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.EventListItemViewHolder>{
 
@@ -36,12 +38,12 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.EventListI
     public EventListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch(viewType) {
             case TYPE_DAY_HEADER:
-                return new EventListItemViewHolder(new DayHeaderView(parent.getContext()));
+                return new EventListItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_day_header, parent, false));
             case TYPE_EVENT:
-                return new EventListItemViewHolder(new EventView(parent.getContext()));
+                return new EventListItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_event, parent, false));
             case TYPE_EMPTY_DAY:
             default:
-                return new EventListItemViewHolder(new EmptyDayView(parent.getContext()));
+                return new EventListItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_agenda_empty_day, parent, false));
         }
     }
 
@@ -84,7 +86,6 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.EventListI
     public void setContent(List<AgendaViewModel> calendar) {
         this.content = calendar;
         notifyDataSetChanged(); //todo a proper diffing implementation between new list and old
-        Log.d("TAG", "agenda adapter setContent notify");
     }
 
     public List<AgendaViewModel> getContent() {

@@ -11,6 +11,7 @@ import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookEvent;
 import com.lacronicus.outlookclone.model.OutlookMonth;
 import com.lacronicus.outlookclone.model.OutlookYear;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +19,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Flattens a Calendar tree for use in a Linear Recyclerview
+ * Flattens a OutlookCalendar tree for use in a Linear Recyclerview
  */
 public class AgendaFlattener {
+    ChronologyContextProvider chronologyContextProvider;
+
+    public AgendaFlattener(ChronologyContextProvider chronologyContextProvider) {
+        this.chronologyContextProvider = chronologyContextProvider;
+    }
 
     public Pair<List<AgendaViewModel>, Map<OutlookDay, Integer>> flatten(OutlookCalendar calendar) {
         List<AgendaViewModel> items = new ArrayList<>();
@@ -32,22 +38,22 @@ public class AgendaFlattener {
         return new Pair<>(items, outlookDayToIndexMap);
     }
 
-    public void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookYear year) {
+    private void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookYear year) {
         //years are not represented in the list
         for (OutlookMonth month : year.getMonths()) {
             flatten(items, outlookDayToIndexMap, month);
         }
     }
 
-    public void  flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookMonth month) {
+    private void  flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookMonth month) {
         //months are not represented in the list
         for (OutlookDay day : month.getDays()) {
             flatten(items, outlookDayToIndexMap, day);
         }
     }
 
-    public void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookDay day) {
-        items.add(new DayHeaderViewModel(day));
+    private void flatten(List<AgendaViewModel> items, Map<OutlookDay, Integer> outlookDayToIndexMap, OutlookDay day) {
+        items.add(new DayHeaderViewModel(chronologyContextProvider, day));
         outlookDayToIndexMap.put(day, items.size() - 1);
 
         if (day.getEvents().size() > 0) {
@@ -60,7 +66,7 @@ public class AgendaFlattener {
         }
     }
 
-    public void flatten(List<AgendaViewModel> items, OutlookEvent event) {
+    private void flatten(List<AgendaViewModel> items, OutlookEvent event) {
         items.add(new EventViewModel(event));
     }
 

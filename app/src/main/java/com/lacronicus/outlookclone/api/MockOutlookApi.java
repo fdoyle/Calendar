@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 
+/**
+* mock out the OutlookApi interface using json from the assets directory
+* */
 public class MockOutlookApi implements OutlookApi {
     Gson gson;
     AssetManager assetManager;

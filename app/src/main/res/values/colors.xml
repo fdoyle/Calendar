@@ -2,7 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="transparentColorPrimary">#663F51B5</color>
+    <color name="transparentColorPrimaryDark">#66303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="transparentColorAccent">#66FF4081</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="divider">#DDD</color>
 
     <color name="day_cell_in_month_selected">#fff</color>
     <color name="day_cell_in_month">#232323</color>

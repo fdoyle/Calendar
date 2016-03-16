@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
-
-    <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:clipChildren="false"
+    android:layout_height="wrap_content">
+    <com.lacronicus.outlookclone.calendar.DayView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/day_cell_day_of_month"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -14,6 +14,7 @@
         android:clickable="true"
         android:gravity="center"
         android:padding="10dp"
+        tools:text="12"
         android:textColor="@color/day_cell_text_color"
         android:textSize="12sp"
         android:textStyle="bold" />

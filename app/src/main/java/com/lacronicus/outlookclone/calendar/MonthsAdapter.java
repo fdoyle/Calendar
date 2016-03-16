@@ -1,7 +1,6 @@
 package com.lacronicus.outlookclone.calendar;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import com.lacronicus.outlookclone.R;
 import com.lacronicus.outlookclone.model.OutlookCalendar;
 import com.lacronicus.outlookclone.model.OutlookDay;
 import com.lacronicus.outlookclone.model.OutlookMonth;
+import com.lacronicus.outlookclone.util.ChronologyContextProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +24,14 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
     List<CalendarMonthViewModel> months = new ArrayList<>();
     Map<OutlookMonth, Integer> monthToIndexMap = new HashMap<>();
     OutlookDay currentlySelectedDay;
-    DaySelectedListener listener;
+    DaySelectedListener daySelectedListener;
+    ChronologyContextProvider chronologyContextProvider;
+
+    public MonthsAdapter() {
+    }
 
     public void setDaySelectedListener(DaySelectedListener listener) {
-        this.listener = listener;
+        this.daySelectedListener = listener;
     }
 
     @Override
@@ -37,27 +41,26 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
-        MonthView2 monthView = (MonthView2) holder.itemView;
+        MonthView monthView = (MonthView) holder.itemView;
         if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
-            monthView.setContent(months.get(position).outlookMonth);
+            monthView.setContent(chronologyContextProvider, months.get(position).outlookMonth);
         }
         monthView.setDaySelectedListener(this);
     }
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position, List<Object> payloads) {
-        MonthView2 monthView = (MonthView2) holder.itemView;
+        MonthView monthView = (MonthView) holder.itemView;
         if (payloads.size() == 0 || !(Boolean) payloads.get(0)) {
             if (monthView.month == null || !monthView.month.equals(months.get(position).outlookMonth)) {
                 monthView.setDaySelectedListener(null);
-                monthView.setContent(months.get(position).outlookMonth);
+                monthView.setContent(chronologyContextProvider, months.get(position).outlookMonth);
                 monthView.setDaySelectedListener(this);
             }
         }
 
         if (currentlySelectedDay != null) {
             monthView.setDaySelectedListener(null);
-            Log.d("TAG", "setting selected day " + currentlySelectedDay.getDayOfMonth() + " " + this.hashCode());
             monthView.setSelectedDay(currentlySelectedDay);
             monthView.setDaySelectedListener(this);
         }
@@ -68,7 +71,8 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
         return months.size();
     }
 
-    public void setContent(OutlookCalendar calendar) {
+    public void setContent(ChronologyContextProvider chronologyContextProvider, OutlookCalendar calendar) {
+        this.chronologyContextProvider = chronologyContextProvider;
         boolean hadExistingContent = months.size() > 0;
         months = new MonthsFlattener().flatten(calendar);
 
@@ -107,8 +111,8 @@ public class MonthsAdapter extends RecyclerView.Adapter<MonthsAdapter.EventViewH
 
     @Override
     public void onDaySelected(OutlookDay day) {
-        if (listener != null) {
-            listener.onDaySelected(day);
+        if (daySelectedListener != null) {
+            daySelectedListener.onDaySelected(day);
         }
     }
 

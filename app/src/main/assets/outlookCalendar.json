@@ -90,7 +90,7 @@
         "DateTime": "2014-10-15T16:30:00",
         "TimeZone": "Pacific Standard Time"
       },
-      "End": "2014-10-15T17:30:00Z",
+      "End": "2014-10-15T17:30:00",
       "Organizer": {
         "EmailAddress": {
           "Name": "Alex D",

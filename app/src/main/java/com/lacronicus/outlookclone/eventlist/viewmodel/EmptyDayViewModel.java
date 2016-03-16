@@ -3,7 +3,7 @@ package com.lacronicus.outlookclone.eventlist.viewmodel;
 import com.lacronicus.outlookclone.model.OutlookDay;
 
 /**
- * Created by fdoyle on 3/9/16.
+ * ViewModel providing the data for an empty day entry in the Agenda View
  */
 public class EmptyDayViewModel implements AgendaViewModel {
     OutlookDay day;

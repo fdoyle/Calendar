@@ -6,8 +6,11 @@ Current work is probably on develop
 
 This document details some preparations made before and during development of the test project
 
+## Building
+./gradlew installDebug
+
 ## A bit about me
-I graduated in 2012 and I've worked as a Software Engineer for WillowTree since. In that time, I've worked directly with numerous clients to build 4 Android apps from scratch, with a fifth that should be out shortly, as well as adding features and doing maintenance on numerous others. On those projects, I've worked alone, as a part of a team, and as a platform lead. 
+I graduated in 2012 and I've worked as a Software Engineer for WillowTree since. In that time, I've worked directly with numerous clients to build 4 Android apps from scratch, with a fifth that should be in the store shortly, as well as adding features and doing maintenance on numerous others. On those projects, I've worked alone, as a part of a team, and as a platform lead. 
 
 Outside of work, I still enjoy writing software, building simple Android demos, learning and tinkering with new technologies, etc. I've recently started learning about web technologies, building some basic React webapps. 
 
@@ -33,7 +36,7 @@ Beyond programming, I enjoy guitar, muay thai, and games of all sorts.
  - the event indicator dots on the month view don't recycle properly. if you drag across multiple months without ever letting the calendar view settle, you'll see data from months past. 
  - on march, select the 31st. go to april, moves to 30th. Go back, still on 30th. 
 
-## Architecture
+## Demo App Architecture
 ### On using the Android Calendar object
 There are a number of options for Dates and Times on android. 
 Date is built into java, but most of the useful stuff is deprecated
@@ -65,8 +68,8 @@ If it became a burden, you could probably make most of these collections sparse,
 
 This model lends itself well to an Observable model, where data is calculated or pulled from the network as needed. If you're about to load a month you don't have, you request it, and the UI will wait. 
 
-### On Creating a lot of objects (which this demo does)
-I very much agree with the idea that you shouldn't optimize until you can prove, though benchmarks, that you need to. 
+### On Creating a lot of objects
+I very much agree with the idea that you shouldn't optimize until you can prove, through benchmarks, that you need to. 
 
 The demo creates a fairly substantial backing model to keep track of all of its events. It is likely very possible to optimize this, but I think it would be at the expense of some amount of clarity. 
 
@@ -76,5 +79,16 @@ originally went with a recyclerview based implementation, but that ended up bein
 Switching to a more directly-accessible gridlayout improved performance significantly, as well as simplified the code.
 
 ### todos
-There are some //todo's in the code, which represent things that I would want to get to in a production app, but feel outside of the current scope
+There are some //todo's in the code. These todo's represent things that are outside of the scope of this demo, but still worthy of recognition. 
+
+### potential optimizations 
+ - These are things that could improve performance, if necessary, but would only serve to clutter the code in a proof of concept. 
+Object pool for Dates and Calendars
+custom viewgroup for CalendarView, instead of a gridlayout.
+Load data/flatten data asynchronously. (noticeable delay on nexus S while loading data, but a nexus 5 handles it fine) (note: slow on nexus S, but only marginally worse than any other app on that phone, unsure how much is just the phone)
+    RxJava makes this pretty easy. Load the data from assets in an Observable.defer, then flatten in another. The view subscribes to the result, and is responsible for showing a loading indicator while it waits. 
+
+
+
+*Develop and Master are both building on March 10. Currently, lint checks can fail the build (a personal preference) but that means differing lint versions can break things. If anything's broken, let me know and we'll get it straightened out* 
 
