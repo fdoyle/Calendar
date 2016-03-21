@@ -77,11 +77,16 @@ Switching to a more directly-accessible gridlayout improved performance signific
 There are some //todo's in the code. These todo's represent things that are outside of the scope of this demo, but still worthy of recognition. 
 
 ### potential optimizations 
- - These are things that could improve performance, if necessary, but would only serve to clutter the code in a proof of concept. 
-Object pool for Dates and Calendars
-custom viewgroup for CalendarView, instead of a gridlayout.
-Load data/flatten data asynchronously. (noticeable delay on nexus S while loading data, but a nexus 5 handles it fine) (note: slow on nexus S, but only marginally worse than any other app on that phone, unsure how much is just the phone)
-    RxJava makes this pretty easy. Load the data from assets in an Observable.defer, then flatten in another. The view subscribes to the result, and is responsible for showing a loading indicator while it waits. 
+
+These are things that could improve performance, if necessary, but would only serve to clutter the code in a proof of concept. 
+ - Object pool for Dates and Calendars
+
+ - custom viewgroup for CalendarView, instead of a gridlayout.
+
+ - Load data/flatten data asynchronously. (noticeable delay on nexus S while loading data, but a nexus 5 handles it fine) (note: slow on nexus S, but only marginally worse than any other app on that phone, unsure how much is just the phone)
+
+ - RxJava makes this pretty easy. Load the data from assets in an Observable.defer, then flatten in another. The view
+    subscribes to the result, and is responsible for showing a loading indicator while it waits. 
 
 
 
